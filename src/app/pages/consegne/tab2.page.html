@@ -1,0 +1,258 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+     Consegna Ad Addò
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <!-- Importa il modulo di IonicModule -->
+    <ion-content>
+
+      <!-- TITOLO -->
+      <ion-title>Segui la procedura</ion-title>
+
+      <!-- LISTA TABS -->
+      <ion-segment [(ngModel)]="activeTab">
+        <!-- TAB DETTAGLIO -->
+        <ion-segment-button value="Dettaglio" (click)="changeTab('Dettaglio')" [disabled]="activeTab !== 'Dettaglio'" >
+          <ion-label>Dettaglio</ion-label>
+        </ion-segment-button>
+
+        <!-- TAB DATI ORDINE -->
+        <ion-segment-button value="Dati Ordine" (click)="changeTab('Dati Ordine')" [disabled]="activeTab !== 'Dati Ordine'" >
+          <ion-label>Dati Ordine</ion-label>
+        </ion-segment-button>
+
+        <!-- Altri TABS... -->
+
+        <!-- TAB RIEPILOGO -->
+        <ion-segment-button value="Riepilogo" (click)="changeTab('Riepilogo')" [disabled]="activeTab !== 'Riepilogo'">
+          <ion-label>Riepilogo</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <!-- FINE LISTA TABS -->
+    </ion-content>
+
+
+  <!-- LISTA CONTENUTI TABS -->
+  <div >
+    <form [formGroup]="deliveryForm" >
+      <!-- CONTENUTO TAB DETTAGLIO -->
+      <div *ngIf="activeTab === 'Dettaglio'" class="example-content-1" >
+        <!-- Esempio di campo input per la data di inizio -->
+        <ion-title class="ion-text-center">Inserisci il periodo</ion-title>
+        <ion-item>
+          <ion-input labelPlacement="floating" formControlName="start_date" type="date" required>
+            <div slot="label">Data Inizio</div>
+          </ion-input>
+        </ion-item>
+        <!-- Esempio di campo input per la data di fine -->
+        <ion-item>
+          <ion-input labelPlacement="floating" formControlName="end_date" type="date" required>
+            <div slot="label">Data Fine </div>
+          </ion-input>
+        </ion-item>
+
+        <!--        INSERIMENTO DETTAGLIO PACCO-->
+        <div *ngIf="showInserimentoDettagli">
+          <ion-title class="ion-text-center ion-padding-top">Inserisci i dettagli del tuo pacco</ion-title>
+          <ion-row >
+            <ion-col>
+              <ion-item>
+                <ion-input labelPlacement="floating" formControlName="weight"  placeholder="kg" type="number" required >
+                  <div slot="label">Peso(kg)</div>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <!-- Esempio di campo input per la data di fine -->
+            <ion-col>
+
+              <ion-item>
+                <ion-input labelPlacement="floating" formControlName="length"  placeholder="cm" type="number" required >
+                  <div slot="label">Lunghezza(cm)</div>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-input labelPlacement="floating" formControlName="height"  placeholder="cm" type="number" required >
+                  <div slot="label">Altezza(cm)</div>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-input labelPlacement="floating" formControlName="width"  placeholder="cm" type="number" required >
+                  <div slot="label">Profondità(cm)</div>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center" >
+            <!-- Esempio di pulsante per eseguire l'azione -->
+            <ion-button (click)="bestSubcontainer();" id="open-modal" expand="block" >CALCOLA SOLUZIONE MIGLIORE</ion-button>
+          </ion-row>
+        </div>
+
+        <!--        SOLUZIONE MIGLIORE-->
+        <!-- SEZIONE ELENCO PACCHI INSERITI -->
+        <div  *ngIf="showElencoSelezionati">
+          <ion-card>
+            <ion-card-header>
+
+            </ion-card-header>
+
+            <ion-card-content>
+              <!-- Itera sugli scomparti selezionati -->
+              <ion-list>
+                <ion-item *ngFor="let selectedCompartment of selectedCompartments">
+                  <ion-label>
+                    <b>Scomparto selezionato:</b> Scomparto: {{ selectedCompartment.machine_id }} - Dimensione: {{ selectedCompartment.height }} X {{ selectedCompartment.width }} X {{ selectedCompartment.length }}
+                  </ion-label>
+                  <ion-badge color="medium" slot="end" (click)="removeCompartment(selectedCompartment)">
+                    <ion-icon name="close"></ion-icon>
+                  </ion-badge>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+
+        </div>
+        <!-- FINE SEZIONE ELENCO PACCHI INSERITI -->
+
+        <ion-button color="primary" (click)="navigateTabs('next');  tabDettaglio = true" [disabled]="isAvantiButtonDisabled()" class="ion-float-end ion-padding-top"> Avanti</ion-button>
+      </div>
+
+      <!-- CONTENUTO TAB DATI ORDINE -->
+      <div *ngIf="activeTab === 'Dati Ordine'" class="example-content-2">
+        <ion-title class="ion-text-center">Inserisci idati del tuo ordine</ion-title>
+        <ion-item>
+          <ion-input labelPlacement="floating" placeholder="Inserisci numero ordine..." formControlName="num_order" type="number">
+            <div slot="label">N° Ordine</div>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input labelPlacement="floating" placeholder="Inserisci cognome destinatario..." formControlName="recipient_last_name" type="text">
+            <div slot="label">Cognome destinatario </div>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input labelPlacement="floating" placeholder="Inserisci nome destinatario..." formControlName="recipient_first_name" type="text">
+            <div slot="label">Nome destinatario </div>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input labelPlacement="floating" placeholder="+39" formControlName="recipient_phone_prefix" type="text">
+            <div slot="label">Prefisso </div>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input labelPlacement="floating" placeholder="Inserisci cellulare..." formControlName="recipient_phone" type="number">
+            <div slot="label">Cellulare destinatario </div>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input labelPlacement="floating" placeholder="Inserisci email..." formControlName="recipient_email" type="email">
+            <div slot="label">Email destinatario </div>
+          </ion-input>
+        </ion-item>
+
+        <ion-row>
+          <ion-col>
+            <ion-button color="medium" (click)="navigateTabs('previous');">Indietro</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="primary" (click)="createDelivery(); navigateTabs('next');" class="ion-float-end">  Prenota</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <!-- Altri CONTENUTI DEGLI ALTRI TABS... -->
+
+
+    </form>
+    <!-- CONTENUTO TAB RIEPILOGO -->
+    <div *ngIf="activeTab === 'Riepilogo'" class="example-content-3">
+
+      <ion-title>Riepilogo ordine</ion-title>
+      <div class="scroll-wrapper">
+        <!-- Dati ordine -->
+        <ion-col size="4">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Dati ordine</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>
+                <b>N. Ordine:</b> {{ deliveryResult!.num_order }} <br>
+                <b>Nome:</b> {{ deliveryResult!.recipient_first_name }} <br>
+                <b>Cognome:</b> {{ deliveryResult!.recipient_last_name }} <br>
+                <b>Cellulare:</b> {{ deliveryResult!.recipient_phone }} <br>
+                <b>Email:</b> {{ deliveryResult!.recipient_email }} <br>
+                <b>Data Inizio:</b> {{ deliveryResult!.start_date | customDate }} <br>
+                <b>Data Fine:</b> {{ deliveryResult!.end_date | customDate }} <br>
+                <b>Dimensioni:</b>
+                Lunghezza: {{ deliveryResult!.product.length }} cm,
+                Altezza: {{ deliveryResult!.product.height }} cm,
+                Peso: {{ deliveryResult!.product.weight }} kg,
+                Larghezza: {{ deliveryResult!.product.width }} cm
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+
+        <!-- ROW PULSANTI AVANTI E INDIETRO -->
+        <ion-row class="ion-justify-content-center ion-align-items-center">
+          <ion-col size="12" class="ion-text-center">
+            <ion-card>
+              <ion-card-content>
+                <qrcode [elementType]="elementType" [qrdata]="qrdata"></qrcode>
+
+                <ion-button expand="full" color="primary" (click)="saveImageToGallery()">Scarica</ion-button>
+
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-button fill="clear" routerLink="/storico"> Vai allo storico <ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- FINE ROW PULSANTI AVANTI E INDIETRO -->
+
+    </div>
+    <!-- FINE LISTA CONTENUTI TABS -->
+  </div>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-text class="ion-margin-start">Ecco lo scomparto scelto per TE!</ion-text>
+          <ion-buttons slot="end">
+            <ion-button color="light" (click)="modal.dismiss()"><ion-icon name="close-outline" size="large" color="primary"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <ion-card>
+
+          <ion-card-content>
+            <h1><b>Scomparto:</b> {{subContatiner?.machine_id}} <br></h1>
+            <h1><b>Dimensione:</b> {{subContatiner?.height}} X {{subContatiner?.width}} X {{subContatiner?.length}} <br></h1>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-button (click)="modal.dismiss(); showInserimentoDettagli = true; showSoluzioneMigliore = false;" color="medium">Annulla</ion-button>
+        <ion-button (click)="modal.dismiss(); showElencoSelezionati = true; showInserimentoDettagli = false; showSoluzioneMigliore = false" color="primary">Accetta</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+
+</ion-content>

@@ -1,0 +1,35 @@
+.ion-page {
+  /* fallback for old browsers */
+  background-color: #FFF706;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(255, 247, 6, 1), rgba(163, 158, 0, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(255, 247, 6, 1), rgba(163, 158, 0, 1))
+}
+
+ion-input.item {
+  /* fallback for old browsers */
+  background-color: #FFF706;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(255, 247, 6, 1), rgba(163, 158, 0, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(255, 247, 6, 1), rgba(163, 158, 0, 1));
+
+  margin-bottom: 20px;
+
+}
+
+.ion-img {
+  width: 100%; /* Rendi l'immagine larga quanto il contenitore */
+  max-width: 300px; /* Imposta una larghezza massima per l'immagine, modifica secondo necessità */
+  margin-top: 20px; /* Aggiungi uno spazio superiore all'immagine */
+}
+.ion-col-cont{
+  margin-bottom: 500px;
+  margin-top: 70px;
+}
+

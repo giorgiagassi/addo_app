@@ -1,0 +1,143 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Contatti</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <!-- CONTAINER -->
+    <ion-content class="ion-padding">
+
+      <!-- SOTTOTITOLO -->
+      <ion-text class="ion-text-center">Hai domande? Non esitare a contattarci. Il nostro team ti risponderà per aiutarti.</ion-text>
+      <!-- FINE SOTTOTITOLO -->
+
+      <!-- SEZIONE CONTATTI -->
+      <section class="mb-4">
+
+        <!-- ROW -->
+
+
+        <!-- COL -->
+        <ion-col size-md="9" size="12" class="mb-md-0 mb-5">
+          <ion-card>
+            <!-- FORM -->
+            <form id="contact-form">
+
+              <!-- ROW -->
+              <ion-row class="my-2">
+
+                <!-- COL -->
+                <ion-col size-md="6" size="12">
+                  <ion-item>
+                    <ion-label position="floating">Cognome e Nome</ion-label>
+                    <ion-input id="nome" name="nome" type="text" [(ngModel)]="nome"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <!-- FINE COL -->
+
+                <!-- COL -->
+                <ion-col size-md="6" size="12">
+                  <ion-item>
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input id="email" name="email" type="text" [(ngModel)]="email"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <!-- FINE COL -->
+
+              </ion-row>
+              <!-- FINE ROW -->
+
+              <!-- ROW -->
+              <ion-row class="my-2">
+                <ion-col size="12">
+                  <ion-item>
+                    <ion-label position="floating">Oggetto</ion-label>
+                    <ion-input id="oggetto" name="oggetto" type="text" [(ngModel)]="oggetto"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <!-- FINE ROW -->
+
+              <!-- ROW -->
+              <ion-row class="my-2">
+
+                <!-- COL -->
+                <ion-col size="12">
+                  <ion-item>
+                    <ion-label position="floating">Messaggio</ion-label>
+                    <ion-textarea id="messaggio" name="messaggio" rows="2" [(ngModel)]="messaggio"></ion-textarea>
+                  </ion-item>
+                </ion-col>
+                <!-- FINE COL -->
+
+              </ion-row>
+              <!-- FINE ROW -->
+
+              <!-- ROW -->
+              <ion-row class="my-2">
+
+                <!-- COL -->
+                <ion-col size="12">
+                  <ion-item>
+                    <ion-label position="stacked">File/s</ion-label>
+                    <ion-input type="file" multiple [(ngModel)]="file"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <!-- FINE COL -->
+
+              </ion-row>
+              <!-- FINE ROW -->
+
+              <!-- PULSANTE INVIA -->
+              <ion-row class="ion-padding-top ion-justify-content-center">
+                <ion-button color="primary" (click)="inviaEmail()">INVIA MESSAGGIO</ion-button>
+              </ion-row>
+              <!-- FINE PULSANTE INVIA -->
+
+            </form>
+            <!-- FINE FORM -->
+          </ion-card>
+        </ion-col>
+        <!-- FINE COL -->
+
+        <!-- COL ICONE -->
+        <ion-col size-md="3" size="12" class="text-center">
+          <ion-list class="list-unstyled mb-0">
+
+            <ion-item class="my-4">
+              <ion-icon name="location"></ion-icon>
+              <ion-label>Martina Franca (TA) Via ceglie, 1</ion-label>
+            </ion-item>
+
+            <ion-item class="my-4">
+              <ion-icon name="call"></ion-icon>
+              <ion-label>+39 080 4803413</ion-label>
+            </ion-item>
+
+            <ion-item class="my-4">
+              <ion-icon name="mail"></ion-icon>
+              <ion-label>info&#64;rossoargilla.com</ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-icon name="globe"></ion-icon>
+              <ion-label><a href="https://www.rossoargilla.com" target="_blank" style="color: #E0D900">www.rossoargilla.com</a></ion-label>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+        <!-- FINE COL ICONE -->
+
+        <!-- FINE ROW -->
+
+      </section>
+      <!-- FINE SEZIONE CONTATTI -->
+
+    </ion-content>
+    <!-- FINE CONTAINER -->
+
+
+
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true">
+  <div class="container ion-page ion-padding-horizontal" style="color: black">
+    <div class="ion-col">
+      <ion-img
+        src="assets/img/addo_bg_white.svg"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+        class="ion-img"
+      ></ion-img>
+    </div>
+    <div class="ion-justify-content-center ion-align-items-center ion-padding-bottom ion-col-cont">
+      <div class="ion-col">
+        <ion-input
+          label="Email"
+          labelPlacement="stacked"
+          [clearInput]="true"
+          placeholder="email"
+          type="email"
+          required
+          class="item"
+          fill="outline"
+          [(ngModel)]="email"
+        ></ion-input>
+      </div>
+      <div class="ion-col">
+        <ion-input
+          label="Password"
+          labelPlacement="stacked"
+          type="password"
+          placeholder="password"
+          class="item"
+          fill="outline"
+          required
+          [(ngModel)]="password"
+        ></ion-input>
+        <p class="ion-text-end">
+          <u (click)="resetPassword()" style="cursor: pointer;">Password dimenticata?</u>
+        </p>
+      </div>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-button shape="round" color="dark" (click)="accedi()">Accedi</ion-button>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <h5 class="mt-5"> Non hai ancora un <strong>Account</strong>?</h5>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-button shape="round" color="dark" fill="outline" routerLink="/registrazione">Registrati</ion-button>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-icon name="call" class="ion-padding-start"></ion-icon> Assistenza: +39 080 4803413
+  </ion-toolbar>
+</ion-footer>

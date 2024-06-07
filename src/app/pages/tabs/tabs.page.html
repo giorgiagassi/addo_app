@@ -1,0 +1,82 @@
+<ion-menu contentId="main-content">
+  <ion-content  color="dark">
+    <!--    home-->
+    <ion-item color="dark">
+      <ion-menu-toggle>
+        <ion-label routerLink="/home/tab1">Home</ion-label>
+      </ion-menu-toggle>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-menu-toggle>
+        <ion-label routerLink="/home/tab2">Consegna Ad Addò</ion-label>
+      </ion-menu-toggle>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-menu-toggle>
+        <ion-label routerLink="/home/tab3">Storico</ion-label>
+      </ion-menu-toggle>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-menu-toggle>
+        <ion-label routerLink="/home/tab4">Contatti</ion-label>
+      </ion-menu-toggle>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-menu-toggle>
+        <ion-label routerLink="/home/tab5">Profilo</ion-label>
+      </ion-menu-toggle>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-menu-toggle>
+        <ion-button >Logout</ion-button>
+      </ion-menu-toggle>
+    </ion-item>
+
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-img slot="end"
+               src="assets/img/addo_white.svg"
+               alt="logo"
+               style="height: 100px; width: 250px"
+      ></ion-img>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="tab1" href="/home/tab1">
+          <ion-icon aria-hidden="true" name="home"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="tab2" href="/home/tab2">
+          <ion-icon aria-hidden="true" name="cart"></ion-icon>
+          <ion-label>Consegne</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="tab3" href="/home/tab3">
+          <ion-icon aria-hidden="true" name="grid"></ion-icon>
+          <ion-label>Storico</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="tab4" href="/home/tab4">
+          <ion-icon aria-hidden="true" name="call"></ion-icon>
+          <ion-label>Contatti</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="tab5" href="/home/tab5">
+          <ion-icon aria-hidden="true" name="person"></ion-icon>
+          <ion-label>Profilo</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-content>
+</div>
