@@ -113,7 +113,7 @@ export class AuthService {
         message: 'Il logout è stato eseguito con successo.',
         buttons: [{
           text: 'OK',
-          handler: () => window.location.reload()
+          handler: () => this.router.navigate(['/login'])
         }]
       });
       await alert.present();

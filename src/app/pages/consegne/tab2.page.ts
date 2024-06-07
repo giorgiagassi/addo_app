@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TDeliveryResult, TSubContainer} from "../../type/delivery.type";
 import {LocalStorageService} from "../../providers/local-storage.service";
-import {AlertController} from "@ionic/angular";
+import {AlertController, Platform} from "@ionic/angular";
 import {HttpHeaders} from "@angular/common/http";
 import {ConsegneService} from "../../providers/consegne.service";
-
+import {Directory, Encoding, Filesystem} from "@capacitor/filesystem";
+import { PermissionState} from '@capacitor/core';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -32,7 +33,8 @@ export class Tab2Page implements OnInit{
   constructor(private fb: FormBuilder,
               private consegneService: ConsegneService,
               private alertController: AlertController,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private platform: Platform) {
 
     this.dataInizio = new Date().toISOString().split('T')[0];
 
@@ -178,27 +180,4 @@ export class Tab2Page implements OnInit{
     return this.deliveryForm.get('end_date')!.invalid || !this.showElencoSelezionati;
   }
 
-  async saveImageToGallery(): Promise<void> {
-    try {
-      const canvas = document.querySelector('canvas') as HTMLCanvasElement;
-      const blob = await new Promise<Blob | null>((resolve) => {
-        canvas.toBlob((blob) => resolve(blob), 'image/png');
-      });
-
-      if (!blob) throw new Error('Errore durante la conversione dell\'immagine in blob');
-
-      const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = 'qr_code.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(blobUrl);
-
-      console.log('Immagine salvata con successo');
-    } catch (error) {
-      console.error('Errore durante il salvataggio dell\'immagine:', error);
-    }
-  }
 }

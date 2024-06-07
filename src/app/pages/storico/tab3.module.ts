@@ -6,14 +6,16 @@ import { Tab3Page } from './tab3.page';
 
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
+import {QRCodeModule} from "angularx-qrcode";
 
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    Tab3PageRoutingModule
-  ],
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        Tab3PageRoutingModule,
+        QRCodeModule
+    ],
   declarations: [Tab3Page]
 })
 export class Tab3PageModule {}

@@ -1,0 +1,210 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Registrazione</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- CONTAINER -->
+  <ion-content class="ion-padding">
+    <div class="ion-justify-content-center ion-align-items-center ion-padding-bottom ion-col-cont ion-padding" *ngIf="credenziali">
+      <div class="ion-col">
+        <ion-input
+          label="Email"
+          labelPlacement="stacked"
+          [clearInput]="true"
+          placeholder="email"
+          type="email"
+          required
+          class="item"
+          fill="outline"
+          #userName
+          [(ngModel)]="email"
+        ></ion-input>
+      </div>
+      <div class="ion-col ion-padding-top">
+        <ion-input
+          label="Password"
+          labelPlacement="stacked"
+          type="password"
+          placeholder="minimo 6 caratteri"
+          class="item"
+          fill="outline"
+          required
+          #userPassword
+          [(ngModel)]="password"
+        ></ion-input>
+      </div>
+
+      <ion-row class="ion-justify-content-center ion-padding-top">
+        <ion-button shape="round" color="dark" (click)="toggleCredenziali()"  [disabled]="!email || !password">Continua</ion-button>
+      </ion-row>
+    </div>
+    <div class="ion-justify-content-center ion-align-items-center ion-padding-bottom ion-col-cont ion-padding" *ngIf="radio && !credenziali">
+      <ion-list>
+        <ion-radio-group [(ngModel)]="tipoUtente">
+          <ion-item>
+            <ion-radio value="business" labelPlacement="end">Azienda</ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-radio value="consumer" labelPlacement="end">Privato</ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+
+      </ion-list>
+      <ion-row class="ion-justify-content-center ion-padding-top">
+        <ion-button shape="round" color="dark" (click)="sceltaUtente()"  [disabled]="!tipoUtente">Continua</ion-button>
+      </ion-row>
+    </div>
+    <div class="ion-justify-content-center ion-align-items-center ion-padding-bottom ion-col-cont" *ngIf="tipoUtente === 'consumer' && mostraForm">
+      <form [formGroup]="consumerForm">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Dati dell'utente</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+            <!-- Nome -->
+            <ion-item>
+              <ion-label position="stacked">Nome</ion-label>
+              <ion-input type="text" formControlName="first_name_C" ></ion-input>
+            </ion-item>
+
+            <!-- Cognome -->
+            <ion-item>
+              <ion-label position="stacked">Cognome</ion-label>
+              <ion-input type="text" formControlName="last_name_C" ></ion-input>
+            </ion-item>
+
+            <!-- Codice fiscale -->
+            <ion-item>
+              <ion-label position="stacked">Codice fiscale</ion-label>
+              <ion-input type="text" formControlName="fiscal_code_C" ></ion-input>
+            </ion-item>
+
+            <!-- Cellulare -->
+            <ion-item>
+              <ion-label position="stacked">Cellulare</ion-label>
+              <ion-input type="tel" formControlName="phone_C" ></ion-input>
+            </ion-item>
+
+            <!-- Data di nascita -->
+            <ion-item>
+              <ion-label position="stacked">Data di nascita</ion-label>
+              <ion-input type="date" formControlName="dob_C" ></ion-input>
+            </ion-item>
+
+            <!-- Luogo di nascita -->
+            <ion-item>
+              <ion-label position="stacked">Luogo di nascita</ion-label>
+              <ion-input type="text" formControlName="birth_place_C" ></ion-input>
+            </ion-item>
+
+            <!-- Indirizzo di residenza -->
+            <ion-item>
+              <ion-label position="stacked">Indirizzo di residenza</ion-label>
+              <ion-input type="text" formControlName="address_C" > </ion-input>
+            </ion-item>
+
+            <!-- Provincia -->
+            <ion-item>
+              <ion-label position="stacked">Provincia</ion-label>
+              <ion-input type="text" formControlName="state_C" ></ion-input>
+            </ion-item>
+
+            <!-- Cittadinanza -->
+            <ion-item>
+              <ion-label position="stacked">Cittadinanza</ion-label>
+              <ion-select formControlName="nationality_code_C" interface="popover">
+                <ion-select-option *ngFor="let cittadinanza of cittadinanze" [value]="cittadinanza.codice">
+                  {{ cittadinanza.nome }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+          </ion-card-content>
+        </ion-card>
+      </form>
+      <ion-button (click)="registrati(email, password, tipoUtente)"  [disabled]="!consumerForm.valid"> Registrati</ion-button>
+    </div>
+    <div class="ion-justify-content-center ion-align-items-center ion-padding-bottom ion-col-cont" *ngIf="tipoUtente === 'business' && mostraForm">
+      <form [formGroup]="businessForm">
+        <ion-card-header>
+          <ion-card-title>Dati dell'azienda</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <!-- Partita IVA -->
+          <ion-item>
+            <ion-label position="stacked">Partita IVA</ion-label>
+            <ion-input type="number" formControlName="vat_number_B"></ion-input>
+          </ion-item>
+
+          <!-- Denominazione -->
+          <ion-item>
+            <ion-label position="stacked">Denominazione</ion-label>
+            <ion-input type="text" formControlName="company_name_B"></ion-input>
+          </ion-item>
+
+          <!-- Cellulare -->
+          <ion-item>
+            <ion-label position="stacked">Cellulare</ion-label>
+            <ion-input type="tel" formControlName="phone_B"></ion-input>
+          </ion-item>
+
+          <!-- PEC -->
+          <ion-item>
+            <ion-label position="stacked">PEC</ion-label>
+            <ion-input type="email" formControlName="pec_B"></ion-input>
+          </ion-item>
+
+          <!-- Numero REA -->
+          <ion-item>
+            <ion-label position="stacked">N. Rea</ion-label>
+            <ion-input type="text" formControlName="num_rea_B"></ion-input>
+          </ion-item>
+
+          <!-- Codice destinatario -->
+          <ion-item>
+            <ion-label position="stacked">Codice destinatario</ion-label>
+            <ion-input type="text" formControlName="recipient_code_B"></ion-input>
+          </ion-item>
+
+          <!-- Comune iscrizione CCIA -->
+          <ion-item>
+            <ion-label position="stacked">Comune iscrizione CCIA</ion-label>
+            <ion-input type="text" formControlName="ccia_city_B"></ion-input>
+          </ion-item>
+
+          <!-- Provincia -->
+          <ion-item>
+            <ion-label position="stacked">Provincia</ion-label>
+            <ion-input type="text" formControlName="province_B"></ion-input>
+          </ion-item>
+
+          <!-- Sede legale -->
+          <ion-item>
+            <ion-label position="stacked">Sede legale</ion-label>
+            <ion-input type="text" formControlName="address_legal_B"></ion-input>
+          </ion-item>
+
+          <!-- Allega visura -->
+          <ion-item>
+            <ion-label>Allega visura</ion-label>
+            <ion-input type="file" formControlName="company_certificate_B"></ion-input>
+          </ion-item>
+
+        </ion-card-content>
+      </form>
+      <ion-button (click)="registrati(email, password, tipoUtente)"  [disabled]="!businessForm.valid"> Registrati</ion-button>
+    </div>
+
+
+  </ion-content>
+  <!-- FINE CONTAINER -->
+
+
+
+</ion-content>

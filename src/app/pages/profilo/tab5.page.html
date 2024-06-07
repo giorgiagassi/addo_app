@@ -1,13 +1,109 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>tab5</ion-title>
+    <ion-title class="ion-text-center">Profilo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tab5</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+    <ion-content class="ion-padding ion-padding-bottom">
+
+
+      <!-- ANAGRAFICA BUSINESS -->
+      <ion-card *ngIf="account?.role === 'business'">
+        <ion-card-content>
+
+          <ion-row>
+            <ion-col size="12" size-md="4" size-lg="3">
+              <ion-item>
+                <ion-label position="stacked">Nome</ion-label>
+                <ion-input type="text" [value]="account.first_name" disabled></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="4" size-lg="3">
+              <ion-item>
+                <ion-label position="stacked">Cognome</ion-label>
+                <ion-input type="text" [value]="account.last_name" disabled></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="4" size-lg="3">
+              <ion-item>
+                <ion-label position="stacked">Data di Nascita</ion-label>
+                <ion-input type="text" [value]="formatDate(account!.dob!)" disabled></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="4" size-lg="3">
+              <ion-item>
+                <ion-label position="stacked">Data di Nascita</ion-label>
+                <ion-input type="text" [value]="account.last_name" disabled></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+        </ion-card-content>
+        <ion-button expand="block" color="primary" (click)="putAccount()">Modifica</ion-button>
+
+      </ion-card>
+      <!-- FINE ANAGRAFICA BUSINESS -->
+
+      <!-- ANAGRAFICA CONSUMER -->
+      <ion-card *ngIf="account?.role === 'consumer'">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" size-md="4" size-lg="3">
+                <ion-item>
+                  <ion-label position="stacked">Nome</ion-label>
+                  <ion-input type="text" [value]="account.first_name" disabled ></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="4" size-lg="3">
+                <ion-item>
+                  <ion-label position="stacked">Cognome</ion-label>
+                  <ion-input type="text" [value]="account.last_name" disabled></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="4" size-lg="3">
+                <ion-item>
+                  <ion-label position="stacked">Data di Nascita</ion-label>
+                  <ion-input type="text" [value]="formatDate(account!.dob!)" disabled></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" size-md="4" size-lg="3">
+                <ion-item>
+                  <ion-label position="stacked">Codice Fiscale</ion-label>
+                  <ion-input type="text" [value]="account?.fiscal_code" disabled></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+
+        <ion-button expand="block" color="primary" (click)="putAccount()">Modifica</ion-button>
+
+      </ion-card>
+      <!-- FINE ANAGRAFICA CONSUMER -->
+
+      <!-- CREDENZIALI -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Credenziali</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input type="text" [value]="account.email" disabled #passwordResetEmail></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Password input" type="password" value="********" disabled></ion-input>
+          </ion-item>
+        </ion-card-content>
+        <ion-button expand="block" color="secondary" (click)="resetPassword(passwordResetEmail.value)">Cambia password</ion-button>
+
+      </ion-card>
+      <!-- FINE CREDENZIALI -->
+    </ion-content>
+
+
+
 </ion-content>

@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
     path: 'home',
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
   },
@@ -14,6 +18,11 @@ const routes: Routes = [
     path: 'tab5',
     loadChildren: () => import('./pages/profilo/tab5.module').then(m => m.Tab5PageModule)
   },
+  {
+    path: 'registrazione',
+    loadChildren: () => import('./pages/registrazione/registrazione.module').then( m => m.RegistrazionePageModule)
+  },
+
 
 
 ];
