@@ -299,11 +299,10 @@ export class RegistrazionePage {
   async registrati(email: string, password: string, role: string) {
     console.log(email, password, role);
     try {
-      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
-      const user = userCredential.user;
+      const user = await this.authService.registerWithEmailAndPassword(email, password);
 
       if (user) {
-        const idToken = await user.getIdToken();
+        const idToken = await this.authService.getIdToken(user);
         console.log('ID Token:', idToken); // Stampa il token
 
         let body: any;
@@ -368,17 +367,13 @@ export class RegistrazionePage {
           };
         }
 
-        const headers = new HttpHeaders({
-          'Authorization': idToken,  // No Bearer prefix
-          'Content-Type': 'application/json'
-        });
-
+        const headers = this.authService.createHeaders(idToken);
         console.log('Headers:', headers); // Stampa gli headers
 
         const delayInMilliseconds = 1000; // Example: 1 second
         setTimeout(() => {
           if (this.tipoUtente == 'business') { }
-          this.authService.createUser(body, { headers }).subscribe({
+          this.authService.createUser(body,  headers ).subscribe({
             next: async (result) => {
               this.loading = false;
               const alert = await this.alertController.create({
@@ -423,6 +418,7 @@ export class RegistrazionePage {
       console.error('Error getting current user:', error);
     }
   }
+
   async handleFileUpload(file: File, path: string) {
     const storageRef = ref(this.storage, path);
 

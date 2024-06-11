@@ -126,7 +126,23 @@ export class AuthService {
     }
   }
 
-  createUser(body: any, headers: any): Observable<any> {
+  async registerWithEmailAndPassword(email: string, password: string): Promise<User> {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  }
+
+  async getIdToken(user: User): Promise<string> {
+    return await user.getIdToken();
+  }
+
+  createHeaders(idToken: string): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': idToken,
+      'Content-Type': 'application/json; charset=utf-8'
+    });
+  }
+
+  createUser(body: any, headers: HttpHeaders): Observable<any> {
     this.loadingSubject.next(true);
     return this.http.post(this.apiUrl, body, { headers })
       .pipe(
