@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.esempio.addo',
-  appName: 'addo_app',
+  appName: 'Addò',
   webDir: 'www'
 };
 
