@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp } from "firebase/app";
 import {environment} from "../environments/environment";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { HttpClientModule} from "@angular/common/http";
 const firebaseApp = initializeApp(environment.firebaseConfig);
 @NgModule({
   declarations: [AppComponent],

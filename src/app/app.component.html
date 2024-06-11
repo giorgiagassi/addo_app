@@ -1,3 +1,8 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>
+
+<div *ngIf="loading" class="global-spinner">
+  <ion-label>Attendere...</ion-label>
+  <ion-spinner name="lines-sharp"></ion-spinner>
+</div>
