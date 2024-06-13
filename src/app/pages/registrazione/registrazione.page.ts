@@ -253,7 +253,8 @@ export class RegistrazionePage {
       private_user_B: new FormControl(),
       recipient_code_B: new FormControl(),
       state_B: new FormControl(),
-      vat_number_B: new FormControl()
+      vat_number_B: new FormControl(),
+      birth_place_B: new FormControl(),
     });
     this.consumerForm = fb.group({
       username_C: new FormControl(),

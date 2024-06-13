@@ -31,7 +31,8 @@
           fill="outline"
           required
           [(ngModel)]="password"
-        ></ion-input>
+        > <ion-input-password-toggle slot="end"></ion-input-password-toggle></ion-input>
+
         <p class="ion-text-end">
           <u (click)="resetPassword()" style="cursor: pointer;">Password dimenticata?</u>
         </p>
