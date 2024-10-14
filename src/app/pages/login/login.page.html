@@ -51,7 +51,27 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-toolbar color="dark">
-    <ion-icon name="call" class="ion-padding-start"></ion-icon> Assistenza: +39 080 4803413
+  <ion-toolbar color="dark" >
+    <ion-row class="ion-padding-top">
+      <ion-icon name="call" class="ion-padding-start"></ion-icon> Assistenza: +39 080 4803413
+        <ion-button color="dark" (click)="setOpen(true)">Privacy Policy</ion-button>
+
+    </ion-row>
+
   </ion-toolbar>
 </ion-footer>
+<ion-modal [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Privacy Policy</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="setOpen(false)">Chiudi</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <app-privacy></app-privacy>
+    </ion-content>
+  </ng-template>
+</ion-modal>

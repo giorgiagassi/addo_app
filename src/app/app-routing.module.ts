@@ -21,7 +21,11 @@ const routes: Routes = [
   {
     path: 'registrazione',
     loadChildren: () => import('./pages/registrazione/registrazione.module').then( m => m.RegistrazionePageModule)
+  },  {
+    path: 'privacy',
+    loadChildren: () => import('./pages/privacy/privacy.module').then( m => m.PrivacyPageModule)
   },
+
 
 
 

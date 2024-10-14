@@ -31,6 +31,11 @@
         <ion-button (click)="logout()">Logout</ion-button>
       </ion-menu-toggle>
     </ion-item>
+    <ion-item color="dark">
+      <ion-menu-toggle>
+        <ion-button color="dark" (click)="setOpen(true)">Privacy Policy</ion-button>
+      </ion-menu-toggle>
+    </ion-item>
 
   </ion-content>
 </ion-menu>
@@ -80,3 +85,18 @@
     </ion-tabs>
   </ion-content>
 </div>
+<ion-modal [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Privacy Policy</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="setOpen(false)">Chiudi</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <app-privacy></app-privacy>
+    </ion-content>
+  </ng-template>
+</ion-modal>

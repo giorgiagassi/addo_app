@@ -12,4 +12,9 @@ export class TabsPage {
   logout(){
     this.autenticazioneService.SignOut()
   }
+  isModalOpen = false;
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
 }
